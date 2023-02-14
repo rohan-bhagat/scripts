@@ -1,0 +1,12 @@
+#!/bin/bash
+
+filename=$(basename -- "$1")
+extension="${filename##*.}"
+newname="${filename%.*}"
+FFMPEG="$HOME/bin/ffmpeg/bin/ffmpeg"
+#ffmpeg -i "$1" -c:v libx265 -c:a aac -b:a 192k -strict -2  -map 0 -x265-params "pools=5 crf=25" -threads 7 "$newname.HEVC.mkv"
+#ffmpeg -i "$1" -c:v libx265 -c:a aac -strict -2  -map 0 -x265-params "pools=5 crf=25" -threads 7 "$newname.HEVC.mkv"
+#FFMPEG -i '$1' -c:v libx265 -c:a copy -map 0 -x265-params 'pools=2 crf=25' -threads 4 '$newname.HEVC.mkv'
+$FFMPEG -i "$1" -c:v libx265 -c:a copy -map 0 -x265-params crf=25 "$newname.HEVC.mkv"
+#ffmpeg -i "$1" -c:v libx265 -c:a libfdk_aac -map 0 -x265-params crf=25 "$newname.HEVC.mkv"
+#sleep 600
